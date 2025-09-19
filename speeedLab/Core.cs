@@ -8,11 +8,21 @@ using UnityEngine;
 namespace speeedLab {
     [HarmonyPatch]
     public class Core : MelonMod {
+        MelonPreferences_Entry<bool> entry;
+        MelonPreferences_Category category;
         public override void OnInitializeMelon() {
             LoggerInstance.Msg("Initialized.");
+            category = MelonPreferences.CreateCategory("speedlab");
+            entry = category.CreateEntry("speedLab Enabled", true);
+            MelonPreferences.Save();
+            category.SaveToFile();
         }
         public override void OnSceneWasLoaded(int buildIndex, string sceneName) {
             base.OnSceneWasLoaded(buildIndex, sceneName);
+            if (entry == null)
+                return;
+            if (!entry.Value)
+                return;
             RenderSettings.fog = false;
             RenderSettings.customReflection = null;
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
