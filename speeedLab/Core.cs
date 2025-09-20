@@ -10,8 +10,15 @@ namespace speeedLab {
     public class Core : MelonMod {
         MelonPreferences_Entry<bool> entry;
         MelonPreferences_Category category;
+
         public override void OnInitializeMelon() {
-            LoggerInstance.Msg("Initialized.");
+            try {
+                LoggerInstance.Msg("Initialized.");
+                HarmonyInstance.PatchAll();
+            }
+            catch (Exception e) {
+                MelonLogger.Error(e);
+            }
             category = MelonPreferences.CreateCategory("speedlab");
             entry = category.CreateEntry("speedLab Enabled", true);
             MelonPreferences.Save();
@@ -28,9 +35,8 @@ namespace speeedLab {
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
             QualitySettings.antiAliasing = 0;
             QualitySettings.billboardsFaceCameraPosition = false;
-            QualitySettings.currentLevel = QualityLevel.Fastest;
             QualitySettings.lodBias = 0;
-            QualitySettings.maximumLODLevel = 2;
+            QualitySettings.maximumLODLevel = 1;
             QualitySettings.pixelLightCount = 0;
             QualitySettings.realtimeReflectionProbes = false;
             QualitySettings.shadowmaskMode = ShadowmaskMode.Shadowmask;
