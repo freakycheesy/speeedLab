@@ -18,6 +18,9 @@
 		<Reference Include="Assembly-CSharp">
 			<HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
 		</Reference>
+		<Reference Include="BoneLib">
+		  <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BONELAB\Mods\BoneLib.dll</HintPath>
+		</Reference>
 		<Reference Include="Il2CppFacepunch.Steamworks.Win64">
 			<HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppFacepunch.Steamworks.Win64.dll</HintPath>
 		</Reference>

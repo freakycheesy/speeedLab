@@ -1,6 +1,7 @@
 ﻿using MelonLoader;
 using HarmonyLib;
 using UnityEngine;
+using BoneLib.BoneMenu;
 
 [assembly: MelonInfo(typeof(speeedLab.Core), "speeedLab", "1.0.0", "freakycheesy", null)]
 [assembly: MelonGame("Stress Level Zero", "BONELAB")]
@@ -19,11 +20,22 @@ namespace speeedLab {
             catch (Exception e) {
                 MelonLogger.Error(e);
             }
+            MelonPrefs();
+            BoneMenus();
+        }
+
+        private void BoneMenus() {
+            Page page = Page.Root.CreatePage("speeedLab", Color.green);
+            page.CreateBool("Enabled (Only works on restart)", Color.green, entry.Value, (a) => { entry.Value = a; });
+        }
+
+        private void MelonPrefs() {
             category = MelonPreferences.CreateCategory("speedlab");
             entry = category.CreateEntry("speedLab Enabled", true);
             MelonPreferences.Save();
             category.SaveToFile();
         }
+
         public override void OnSceneWasLoaded(int buildIndex, string sceneName) {
             base.OnSceneWasLoaded(buildIndex, sceneName);
             if (entry == null)
